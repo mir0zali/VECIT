@@ -1,7 +1,7 @@
 // Central settings. Everything here can be overridden with environment variables.
 module.exports = {
   port: Number(process.env.PORT || 3000),
-  baseUrl: (process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`).replace(/\/$/, ''),
+  baseUrl: (process.env.BASE_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT || 3000}`).replace(/\/$/, ''),
   siteName: process.env.SITE_NAME || 'Vectorly',
 
   stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',

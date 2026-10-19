@@ -48,7 +48,18 @@ Pay with card `4242 4242 4242 4242`, any future date, any CVC. For local testing
 
 Pro unlocks as soon as Stripe redirects back (the session is checked with Stripe), and the webhook keeps the plan in sync when a subscription renews, fails or is canceled.
 
-## Deploy
+## Deploy on Render
+
+The repository includes `render.yaml`, so Render sets up the service and a 1 GB disk for the database and logo files.
+
+1. Sign up at https://render.com with your GitHub account.
+2. Click **New** > **Blueprint** and pick this repository.
+3. Fill in `ADMIN_EMAIL` and `ADMIN_PASSWORD` (your admin login). Leave the Stripe keys blank for now to use demo payments.
+4. Click **Apply**. The site goes live at `https://vectorly-xxxx.onrender.com`.
+
+The Starter plan (about $7/month plus $0.25/GB for the disk) is needed because free Render services lose their files on every restart. When you add Stripe, the webhook address is `https://YOUR-SITE.onrender.com/billing/webhook`.
+
+## Deploy elsewhere
 
 It is a single Node process that writes to `data/` (SQLite database, logo files, previews), so host it somewhere with a persistent disk: Render, Railway, Fly.io or a small VPS. Set `BASE_URL` to the public https address. Serverless hosts without a disk (Vercel, Netlify functions) need the storage moved to a hosted database and object storage first.
 

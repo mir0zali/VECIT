@@ -134,7 +134,7 @@ function seed() {
     const password = process.env.ADMIN_PASSWORD || crypto.randomBytes(9).toString('base64url');
     const id = auth.createUser({ email, name: 'Admin', password });
     db.prepare('UPDATE users SET is_admin = 1 WHERE id = ?').run(id);
-    console.log(`Admin account: ${email} / ${password}`);
+    console.log(process.env.ADMIN_PASSWORD ? `Admin account: ${email} (password from ADMIN_PASSWORD)` : `Admin account: ${email} / ${password}`);
   }
 }
 
